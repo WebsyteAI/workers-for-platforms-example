@@ -4,17 +4,17 @@ compatibility_date = "2024-04-03"
 
 [[ dispatch_namespaces ]]
 binding = "dispatcher"
-namespace = "workers-for-platforms-example-project" # make sure this is the same as the DISPATCH_NAMESPACE_NAME var
+namespace = "testing" # make sure this is the same as the DISPATCH_NAMESPACE_NAME var
 
 [[ d1_databases ]]
 binding = "DB"
 database_name = "workers-for-platforms-example-project"
-database_id = ""
-preview_database_id = ""
+database_id = "c55e5a6c-38c0-4c39-9bbb-0a910356103c"
+preview_database_id = "c55e5a6c-38c0-4c39-9bbb-0a910356103c"
 
 [vars]
-DISPATCH_NAMESPACE_NAME = "workers-for-platforms-example-project"
-DISPATCH_NAMESPACE_ACCOUNT_ID = ""
+DISPATCH_NAMESPACE_NAME = "testing"
+DISPATCH_NAMESPACE_ACCOUNT_ID = "85007e57ff327d1bd0f10025e9ea3aa3"
 # The necessary secrets are:
 # - DISPATCH_NAMESPACE_API_TOKEN
 # Run `echo <VALUE> | wrangler secret put <NAME>` for each of these
