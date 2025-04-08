@@ -213,14 +213,15 @@ app.put('/script/:name', withDb, withCustomer, async (c) => {
 });
 
 
-app.get('/:path{.+}', withDb, async (c) => {
+// Handle all HTTP methods (GET, POST, PUT, PATCH, DELETE, etc.) for the path pattern
+app.all('/:path{.+}', withDb, async (c) => {
   try {
     // TODO: doesn't work with wrangler local yet
 
     /*
       * look up the worker within our namespace binding.
       * Also look up any custom config tied to this script + outbound workers on this script
-      * to attach to the GET call.
+      * to attach to the request.
       *
       * this is a lazy operation. if the worker does not exist in our namespace,
       * no error will be returned until we actually try to `.fetch()` against it.
@@ -231,12 +232,13 @@ app.get('/:path{.+}', withDb, async (c) => {
     // Get the first part of the hostname (the subdomain)
     const scriptName = hostname.split('.')[0];
     
-    const dispatchLimits = (await GetDispatchLimitFromScript(c.var.db, scriptName)).results as unknown as DispatchLimits;
-    const outboundWorker = (await GetOutboundWorkerFromScript(c.var.db, scriptName)).results as unknown as OutboundWorker;
-    const workerArgs: WorkerArgs = {};
-    const worker = c.env.dispatcher.get(scriptName, workerArgs, { limits: dispatchLimits, outbound: outboundWorker?.outbound_script_id });
+    // const dispatchLimits = (await GetDispatchLimitFromScript(c.var.db, scriptName)).results as unknown as DispatchLimits;
+    // const outboundWorker = (await GetOutboundWorkerFromScript(c.var.db, scriptName)).results as unknown as OutboundWorker;
+    // const workerArgs: WorkerArgs = {};
+    const worker = c.env.dispatcher.get(scriptName);
     /*
       * call `.fetch()` on the retrieved worker to invoke it with the request.
+      * This will forward the original HTTP method (GET, POST, PUT, etc.) to the worker.
       *
       * either `await` or `.catch()` must be used here to return a different
       * response for the 'worker not found' exception.
