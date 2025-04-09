@@ -226,7 +226,12 @@ app.all('*', async (c) => {
     const url = new URL(c.req.url);
     const hostname = url.hostname;
     // Get the first part of the hostname (the subdomain)
-    const scriptName = hostname.split('.')[0];
+    let scriptName = hostname.split('.')[0];
+    
+    // Remove the "-pv" suffix if present
+    if (scriptName.endsWith('-pv')) {
+      scriptName = scriptName.slice(0, -3); // Remove the last 3 characters ("-pv")
+    }
 
     // const dispatchLimits = (await GetDispatchLimitFromScript(c.var.db, scriptName)).results as unknown as DispatchLimits;
     // const outboundWorker = (await GetOutboundWorkerFromScript(c.var.db, scriptName)).results as unknown as OutboundWorker;
