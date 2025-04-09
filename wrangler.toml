@@ -1,4 +1,4 @@
-name = "workers-for-platforms-example-project"
+name = "websyte-ai-worker-dispatcher"
 main = "src/index.ts"
 compatibility_date = "2024-04-03"
 
@@ -18,3 +18,7 @@ DISPATCH_NAMESPACE_ACCOUNT_ID = "85007e57ff327d1bd0f10025e9ea3aa3"
 # The necessary secrets are:
 # - DISPATCH_NAMESPACE_API_TOKEN
 # Run `echo <VALUE> | wrangler secret put <NAME>` for each of these
+
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = true
