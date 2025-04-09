@@ -228,8 +228,6 @@ app.all('*', async (c) => {
     // Get the first part of the hostname (the subdomain)
     const scriptName = hostname.split('.')[0];
 
-    console.log('scriptName', scriptName);
-
     // const dispatchLimits = (await GetDispatchLimitFromScript(c.var.db, scriptName)).results as unknown as DispatchLimits;
     // const outboundWorker = (await GetOutboundWorkerFromScript(c.var.db, scriptName)).results as unknown as OutboundWorker;
     // const workerArgs: WorkerArgs = {};
